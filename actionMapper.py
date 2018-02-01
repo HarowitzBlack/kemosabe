@@ -1,7 +1,8 @@
 
 class Mapper():
 
-    def __init__(self,entity_dict,actions):
+
+    def __init__(self, entity_dict, actions):
         self.entity_dict = entity_dict
         self.actions = actions
         if self.entity_dict:
@@ -11,7 +12,6 @@ class Mapper():
                 self.trigger_action()
             except:
                 pass
-
 
     def trigger_action(self):
         for dict_key in self.actions.keys():

@@ -5,6 +5,7 @@
 from flask import Flask
 from flask import request
 from handler import Handler
+from payload_parser import builder
 import botutils
 
 
@@ -17,6 +18,8 @@ bot = botutils.Messenger_wrapper(ACCESS_TOKEN)
 
 
 botutils.get_started_btn()
+
+p = builder()
 
 
 @app.route('/hook',methods=['GET'])
@@ -35,17 +38,28 @@ def handle_incomming_responses():
         actions = {
             "@get_started":get_started,
             "@sup":say_hello,
+            "@crapday":crap_day,
         }
         Handler(response_data,actions)
         return "OK",200
 
 def get_started(entity_dict):
     user_id = entity_dict['id']
-    bot.quick_reply(user_id,"Hello",[("sup","@sup","text")])
+    p_str = p.create_payload(action="sup",custom_text="what up dawg!",coffee="capachino")
+    p_str1 = p.create_payload(action="crapday",custom_text="that's sad!",coffee="espresso")
+    bot.quick_reply(user_id,"Hello",[("sup",p_str,"text"),("had a crap day",p_str1,"text")])
 
 def say_hello(entity_dict):
     user_id = entity_dict['id']
-    bot.send_text_message(user_id,"nothing much!")
+    cust_msg = entity_dict['custom_text']
+    cust_msg += "Do ya like {0}?".format(entity_dict['coffee'])
+    bot.send_text_message(user_id,cust_msg)
+
+def crap_day(entity_dict):
+    user_id = entity_dict['id']
+    cust_msg = entity_dict['custom_text'] + "An {0} should take the pressure down.".format(entity_dict['coffee'])
+    bot.send_text_message(user_id,cust_msg)
+
 
 
 

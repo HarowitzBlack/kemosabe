@@ -176,18 +176,3 @@ class Messenger_wrapper(object):
         }
         r = self.send(user_id,payload=payload)
         return r
-
-def Persistant_menu(show_menu=True,composer_input=True):
-    params = {
-        "access_token":token,
-    }
-    payload = json.dumps(menu.freemium_menu)
-    resp = requests.post(
-        "https://graph.facebook.com/v2.6/me/messenger_profile",
-        params=params,
-        data=payload,
-        headers={
-            'Content-type': 'application/json'
-        }
-    )
-    return resp.json()
