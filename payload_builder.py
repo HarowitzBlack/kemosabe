@@ -1,9 +1,10 @@
 
 
-class builder():
+class payload():
+    """ contains methods to build and parse payload
+    """
 
-
-    def create_payload(self,action='',**kwargs):
+    def create(self,action='',**kwargs):
         """ Builds the payload when action and params are given
 
             >> create_payload(action="getallpetstores",pet="cat",color='white')
@@ -17,13 +18,15 @@ class builder():
         if self.action == '':
             print("action can't be empty")
             return
+        # create the base string
         self.final_str = "@" + self.action + "?"
+        # add key,value to the base string
         for key,value in kwargs.items():
             self.final_str += "&{}={}".format(key,value)
         return self.final_str
 
 
-    def parse_payload(self,string):
+    def parse(self,string):
         """ parses the payload string to extract params
             >> @getallpetstores?&color=white&pet=cat
 

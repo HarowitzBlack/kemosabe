@@ -1,9 +1,9 @@
 
+
+from .payload_builder import payload
 from .mapper import Mapper
-from .payload_parser import builder
 import time
 import hashlib
-
 
 
 class session():
@@ -11,10 +11,6 @@ class session():
     """ Keeps track of all the entities that come in with every request.
 
         ex: { 'id':1235,'msg':'Hey!','payload':'@start'}
-
-        * add new entity to the dict using a method
-        * show the entity dict
-
     """
     def __init__(self):
         self.__items_in_session = {}
@@ -41,11 +37,10 @@ class Handler():
     """
 
     def __init__(self,json_response,actions):
-        # json response is the data sent by facebook
         self.json_response = json_response
         self.actions = actions
         self.session = session()
-        self.payload_extractor = builder()
+        self.payload_extractor = payload()
         self.json_parser(self.json_response)
         # handler should call the mapper class
         # json_parser method strips down the json data and inserts
@@ -77,7 +72,7 @@ class Handler():
                             self.session.add_to_session("text",self.text_msg)
                         if messages['message'].get('quick_reply'):
                             self.quick_payload = self.extract_quick_reply_payload(messages)
-                            p_load = self.payload_extractor.parse_payload(self.quick_payload)
+                            p_load = self.payload_extractor.parse(self.quick_payload)
                             print(p_load)
                             for pk,v in p_load.items():
                                 self.session.add_to_session(pk,v)
@@ -104,6 +99,7 @@ class Handler():
                     return payload['message']['attachments'][0]['payload']['coordinates']
 
     def extract_user_payload(self,payload):
+        # digging through the source code, huh? good luck, you'll find something ;)
         """ Extract action from the postback response """
         if payload.get('postback'):  # for postback getstarted button
             if payload['postback'].get('referral'):

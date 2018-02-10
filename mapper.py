@@ -1,9 +1,9 @@
 
-# INTERNAL LOGIC o_o
+# INTERNAL LOGIC (o_o)
 
 class Mapper():
 
-    """ This class is the core part of kemosabe.
+    """ This class is the core part of botch.
         All you need to know is this class triggers
         the function that's mapped to it's corresponding
         action.
