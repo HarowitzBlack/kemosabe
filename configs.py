@@ -5,7 +5,7 @@ class Configurations():
     def __init__(self):
         self.keys = dict()
 
-    def add(self,access_token=None,verify_token=None,**kwargs):
+    def set(self,access_token=None,verify_token=None,**kwargs):
         if access_token == None:
             # raise an exception here
             # confignotfound!
@@ -23,5 +23,5 @@ class Configurations():
 
 if __name__ == "__main__":
     x = Configurations()
-    x.add(access_token="okfmv",verify_token="oklol")
+    x.set(access_token="okfmv",verify_token="oklol")
     x.show()

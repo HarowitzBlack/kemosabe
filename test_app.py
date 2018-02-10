@@ -2,25 +2,10 @@
 # THIS FILE IS INDENPENDENT AND DOESN'T DEPEND ON THE BOT FRAMEWORK
 # JUST FOR TESTING
 
-from flask import Flask
-from flask import request
-from handler import Handler
-from payload_parser import builder
-import botutils
+from flask import Flask,request
 
 
-
-
-verify_token = "bot"
-ACCESS_TOKEN = "EAAExpe5DqoQBAHrqGU2xq4atYfT216fIh58cTCpSKINOawr4lLqDKZAudzxlycaAFMsstx5HhObIrfUp8aetisdcMZApr3eYZC8RHEEmTruZC5zxeZA3RdPdByhP5vESwDahME1cFrvtpdue5pR0CEVbiMLjbBS4FDmxAz8YUHwZDZD"
 app = Flask(__name__)
-bot = botutils.Messenger_wrapper(ACCESS_TOKEN)
-
-
-botutils.get_started_btn()
-
-p = builder()
-
 
 @app.route('/hook',methods=['GET'])
 def verify_webhook():
@@ -28,7 +13,6 @@ def verify_webhook():
         if request.args.get("hub.verify_token") == verify_token:
             return request.args.get("hub.challenge")
         return "OK",200
-
 
 # webhook to get
 @app.route('/hook',methods=['POST'])
@@ -47,7 +31,10 @@ def get_started(entity_dict):
     user_id = entity_dict['id']
     p_str = p.create_payload(action="sup",custom_text="what up dawg!",coffee="capachino")
     p_str1 = p.create_payload(action="crapday",custom_text="that's sad!",coffee="espresso")
-    bot.quick_reply(user_id,"Hello",[("sup",p_str,"text"),("had a crap day",p_str1,"text")])
+    bot.quick_reply(user_id,"Hello",[
+                    ("sup",p_str,"text"),
+                    ("had a crap day",p_str1,"text")
+    ])
 
 def say_hello(entity_dict):
     user_id = entity_dict['id']

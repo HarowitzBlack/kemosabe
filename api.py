@@ -8,7 +8,7 @@ import json
 
 
 
-token = "EAAExpe5DqoQBAHrqGU2xq4atYfT216fIh58cTCpSKINOawr4lLqDKZAudzxlycaAFMsstx5HhObIrfUp8aetisdcMZApr3eYZC8RHEEmTruZC5zxeZA3RdPdByhP5vESwDahME1cFrvtpdue5pR0CEVbiMLjbBS4FDmxAz8YUHwZDZD"
+token = ""
 
 
 def get_started_btn():
@@ -69,9 +69,7 @@ class json_response_builder():
                                             },]
                         })
 
-            If you don't understand this function don't fret. It's fucking nuts. It takes a while to
-            understand. I'll explicity add comments in it so you can understand it better.
-            This function still needs to be updated.
+            If you don't understand this function just forget it lol!
 
             This function builds the template based on the given data.
             The data is structured accordingly, then this function accesses it.
@@ -121,7 +119,7 @@ class json_response_builder():
 
 
 
-class Messenger_wrapper(object):
+class MessengerAPI(object):
 
     def __init__(self,token):
         self.params = { "access_token": token }

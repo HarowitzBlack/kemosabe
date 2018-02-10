@@ -1,10 +1,12 @@
 
-import actionMapper
-import payload_parser
+from .mapper import Mapper
+from .payload_parser import builder
+import time
+import hashlib
 
 
 
-class EntityRecorder():
+class session():
 
     """ Keeps track of all the entities that come in with every request.
 
@@ -15,17 +17,17 @@ class EntityRecorder():
 
     """
     def __init__(self):
-        self.__keeper = {}
+        self.__items_in_session = {}
 
-    def add_entity(self,name,value):
+    def add_to_session(self,name,value):
         """ Insert the value into the dict """
         self.value = value
         self.name  = name
         self.__keeper[self.name] = self.value
 
-    def get_entities(self):
+    def get_session_variables(self):
         """ return the dict """
-        return self.__keeper
+        return self.__items_in_session
 
 class Handler():
     """This class extracts the required data from the json response sent by fb for every request.
@@ -42,17 +44,16 @@ class Handler():
         # json response is the data sent by facebook
         self.json_response = json_response
         self.actions = actions
-        self.entity_recorder = EntityRecorder()
-        self.payload_extractor = payload_parser.builder()
+        self.session = session()
+        self.payload_extractor = builder()
         self.json_parser(self.json_response)
         # handler should call the mapper class
         # json_parser method strips down the json data and inserts
-        # them into the entity_recorder object
-        # It can be accessed by using the get_entities() method of
-        # the EntityRecorder Class
-        self.entities = self.entity_recorder.get_entities()
-        actionMapper.Mapper(self.entities,self.actions)
-
+        # them into the session object
+        # It can be accessed by using the get_session_variables() method of
+        # the session Class
+        self.session_variables = self.session.get_session_variables()
+        Mapper(self.session_variables,self.actions)
 
     def json_parser(self,json_data):
         """ Extracts data from json_data and inserts them into the entity_recorder
@@ -64,26 +65,31 @@ class Handler():
             if entry.get("messaging"):
                 for messages in entry['messaging']:
                     self.user_id = messages['sender']['id']
-                    self.entity_recorder.add_entity("id",self.user_id)
+                    self.session.add_to_session("id",self.user_id)
+                    # add a unique id to every msg
+                    hash_msg = "63cade1d33722aef702281225ca15c03229aabd8"
+                    new_hash_msg = hash_msg + time.time()
+                    msg = hashlib.md5(new_hash_msg.encode()).digest()
+                    self.session.add_to_session("unique_id",msg)
                     if messages.get('message'):
                         if messages['message'].get('text'):
                             self.text_msg = messages['message']['text']
-                            self.entity_recorder.add_entity("text",self.text_msg)
+                            self.session.add_to_session("text",self.text_msg)
                         if messages['message'].get('quick_reply'):
                             self.quick_payload = self.extract_quick_reply_payload(messages)
                             p_load = self.payload_extractor.parse_payload(self.quick_payload)
                             print(p_load)
                             for pk,v in p_load.items():
-                                self.entity_recorder.add_entity(pk,v)
-                            
+                                self.session.add_to_session(pk,v)
+
 
                         if messages['message'].get('attachments'):
                             self.user_location = self.extract_user_location(messages)
-                            self.entity_recorder.add_entity("location",self.user_location)
+                            self.session.add_to_session("location",self.user_location)
 
                     if messages.get('postback'):  # for postback getstarted button
                         self.user_action = self.extract_user_payload(messages)
-                        self.entity_recorder.add_entity("action",self.user_action)
+                        self.session.add_to_session("action",self.user_action)
 
     def extract_quick_reply_payload(self,payload):
         """ Extract action from quick reply """
