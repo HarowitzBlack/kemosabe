@@ -1,6 +1,15 @@
 
 # INTERNAL LOGIC (o_o)
 
+class dictor(object):
+    """ Convert the ugly dict into an object
+    """
+
+    def __init__(self,d):
+        self.__dict__.update(d)
+
+    
+
 class Mapper():
 
     """ This class is the core part of botch.
@@ -15,6 +24,7 @@ class Mapper():
 
     def __init__(self, session_dict, actions):
         self.session_dict = session_dict
+        self.session_attr = dictor(self.session_dict)
         self.actions = actions
         if self.session_dict:
             try:
@@ -33,6 +43,6 @@ class Mapper():
                 # response we are looking for.
                 if len(self.session_dict) > 1:
                     #print("actions:",self.user_action)
-                    self.actions[dict_key](self.session_dict)
+                    self.actions[dict_key](self.session_attr)
                 else:
                     pass

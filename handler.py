@@ -19,7 +19,7 @@ class session():
         """ Insert the value into the dict """
         self.value = value
         self.name  = name
-        self.__keeper[self.name] = self.value
+        self.__items_in_session[self.name] = self.value
 
     def get_session_variables(self):
         """ return the dict """
@@ -63,8 +63,8 @@ class Handler():
                     self.session.add_to_session("id",self.user_id)
                     # add a unique id to every msg
                     hash_msg = "63cade1d33722aef702281225ca15c03229aabd8"
-                    new_hash_msg = hash_msg + time.time()
-                    msg = hashlib.md5(new_hash_msg.encode()).digest()
+                    new_hash_msg = hash_msg + str(round(time.time()))
+                    msg = hashlib.md5(new_hash_msg.encode()).hexdigest()
                     self.session.add_to_session("unique_id",msg)
                     if messages.get('message'):
                         if messages['message'].get('text'):
