@@ -1,18 +1,15 @@
 
 
 """
-
-botch - Build messenger bots with ease!
-
-named it after my buddy ;)
+Kemosabe - (RMBF) rapid messenger bot framework
+copyright 2018 (c)
 
 """
 
 # If it's meant to be, it'll be
 from .handler import Handler as botch
 from .payload_builder import payload
-from .api import MessengerAPI
-from .api import *
+
 
 
 __author__      = 'Joel Benjamin (HarowitzBlack)'
