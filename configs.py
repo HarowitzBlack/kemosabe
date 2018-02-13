@@ -1,5 +1,7 @@
 
 
+# NOT USED YET. FOR FUTURE USE PERHAPS?
+
 class Configurations():
 
     def __init__(self):
