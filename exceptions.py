@@ -1,0 +1,5 @@
+
+
+
+class ConfigurationNotFound(Exception):
+    pass

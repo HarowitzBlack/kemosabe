@@ -6,11 +6,6 @@ import requests
 import json
 
 
-
-
-token = ""
-
-
 def get_started_btn():
     params = {
         "access_token":token,
@@ -117,11 +112,13 @@ class json_response_builder():
             })
         return element_list
 
+from .helpers import get_token
 
 
 class MessengerAPI(object):
 
-    def __init__(self,token):
+    def __init__(self):
+        token = get_token()
         self.params = { "access_token": token }
         self.headers = { 'Content-type': 'application/json' }
         self.graph_api_endpoint = "https://graph.facebook.com/v2.6/me/messages"
