@@ -18,6 +18,10 @@ coming soon...⚡️
 
 coming soon...
 
-## Quick Tutorial 🙌🕺
+## Building a simple bot 🙌🕺
+
+I'll add a link to the file.
+
+![alt text](https://github.com/HarowitzBlack/kemosabe/blob/master/example.png)
 
     
