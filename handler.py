@@ -2,6 +2,7 @@
 
 from .payload_builder import payload
 from .mapper import Mapper
+from .helpers import show_message
 import time
 import hashlib
 
@@ -37,11 +38,19 @@ class Handler():
     """
 
     def __init__(self,json_response,actions):
+        if len(actions) == 0:
+            show_message('e',"Action dict cannot be empty")
+        if "@get_started" not in actions.keys():
+            show_message('e',"action @get_started couldn't be found in the dict.")
+
         self.json_response = json_response
         self.actions = actions
         self.session = session()
         self.payload_extractor = payload()
-        self.json_parser(self.json_response)
+        try:
+            self.json_parser(self.json_response)
+        except:
+            show_message('e',"JSON error. Couldn't parse the data")
         # handler should call the mapper class
         # json_parser method strips down the json data and inserts
         # them into the session object
@@ -107,8 +116,6 @@ class Handler():
                     return payload['postback']['referral']['ref']
             if payload['postback'].get('payload'):
                 return payload['postback']['payload']
-
-
 
 
 if __name__ == "__main__":

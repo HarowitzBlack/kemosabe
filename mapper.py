@@ -8,7 +8,7 @@ class dictor(object):
     def __init__(self,d):
         self.__dict__.update(d)
 
-    
+
 
 class Mapper():
 
@@ -42,7 +42,7 @@ class Mapper():
                 # If the session_dict has more than 1 item, then it is the
                 # response we are looking for.
                 if len(self.session_dict) > 1:
-                    #print("actions:",self.user_action)
                     self.actions[dict_key](self.session_attr)
+                    print("session attributes:",vars(self.session_attr))
                 else:
                     pass

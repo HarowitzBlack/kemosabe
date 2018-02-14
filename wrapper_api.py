@@ -31,6 +31,9 @@ def parse(action='',**kwargs):
     return pstr
 
 def set_configurations(api_key="",path="."):
+    """
+        
+    """
     if api_key == "" or len(api_key) < 177:
         print("Invalid configs")
         return
