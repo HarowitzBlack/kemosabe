@@ -5,18 +5,14 @@
 class Configurations():
 
     def __init__(self):
+        print("Yeah configs loaded")
         self.keys = {"access_token":"","verify_token":""}
 
     def set(self,access_token=None,verify_token=None,**kwargs):
         """ sets the config keys. You'll know the rest.
         """
-        if access_token == None:
-            # raise an exception here
-            # confignotfound!
+        if access_token == None or verify_token == None:
             print("Need access token")
-        if verify_token == None:
-            # here too
-            print("Need verify token")
         # put the configs in the dict
         self.keys['access_token'] = access_token
         self.keys['verify_token'] = verify_token

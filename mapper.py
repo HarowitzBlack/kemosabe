@@ -1,14 +1,12 @@
 
 # INTERNAL LOGIC (o_o)
 
-class dictor(object):
+class DictoObj(object):
     """ Convert the ugly dict into an object
     """
 
     def __init__(self,d):
         self.__dict__.update(d)
-
-
 
 class Mapper():
 
@@ -24,7 +22,7 @@ class Mapper():
 
     def __init__(self, session_dict, actions):
         self.session_dict = session_dict
-        self.session_attr = dictor(self.session_dict)
+        self.session_attr = DictoObj(self.session_dict)
         self.actions = actions
         if self.session_dict:
             try:
