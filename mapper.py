@@ -10,7 +10,7 @@ class DictoObj(object):
 
 class Mapper():
 
-    """ This class is the core part of botch.
+    """ This class is the core part of Kemosabe.
         All you need to know is this class triggers
         the function that's mapped to it's corresponding
         action.
