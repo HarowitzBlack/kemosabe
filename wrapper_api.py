@@ -2,12 +2,14 @@
 
 from .api import MessengerAPI
 from .payload_builder import payload
+from .configs import configurations
 import os
 import json
 
 
 bot = MessengerAPI()
 pload = payload()
+cfgs = configurations()
 
 
 def send_text_message(uid,text):
@@ -49,21 +51,6 @@ def parse(action='',**kwargs):
     pstr = pload.parse(action,**kwargs)
     return pstr
 
-def set_configurations(api_key="",path="."):
-    """
-        creates the config file to store api_key
-    """
-    if api_key == "" or len(api_key) < 177:
-        print("Invalid configs")
-        return
-
-    pth = path + "/configs.json"
-    try:
-        with open(pth,"w") as config_file:
-            keys = {
-                "api_token":api_key,
-            }
-            key_str = json.dumps(keys)
-            config_file.write(key_str)
-    except Exception as e:
-        print(e)
+def set_configurations(api_key=None,verify_token=None):
+    # set the configs here
+    cfgs.set(api_key=api_key,verify_token=verify_token)

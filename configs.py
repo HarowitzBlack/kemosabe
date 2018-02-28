@@ -1,29 +1,20 @@
 
 
-# NOT USED YET. FOR FUTURE USE PERHAPS?
+class configurations():
 
-class Configurations():
+    _configs = {}
 
-    def __init__(self):
-        print("Yeah configs loaded")
-        self.keys = {"access_token":"","verify_token":""}
+    def set(self,api_key=None,verify_token=None):
+        if api_key == None:
+            print("Set an api key")
+        elif len(api_token) < 177:
+            print("Invalid api key")
 
-    def set(self,access_token=None,verify_token=None,**kwargs):
-        """ sets the config keys. You'll know the rest.
-        """
-        if access_token == None or verify_token == None:
-            print("Need access token")
-        # put the configs in the dict
-        self.keys['access_token'] = access_token
-        self.keys['verify_token'] = verify_token
-        # puts additional configs in the dict
-        for kw,v in kwargs.items():
-            self.keys[kw] = v
+        if verify_token == None:
+            print("Set a verification token")
+
+        configurations._configs['api_token'] = api_key
+        configurations._configs['vf_token']  = v_tok
 
     def get(self):
-        return self.keys
-
-if __name__ == "__main__":
-    x = Configurations()
-    x.set(access_token="okfmv",verify_token="oklol")
-    x.get()
+        return configurations._configs

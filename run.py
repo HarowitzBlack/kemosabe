@@ -1,9 +1,11 @@
 
 from flask import Flask,request
 from .handler import Handler
+from .configs import configurations
 
 
 app = Flask(__name__)
+cfg = configurations
 
 # for verification
 @app.route('/hook',methods=['GET'])
