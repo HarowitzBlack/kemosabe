@@ -1,4 +1,5 @@
 
+print("events module loaded")
 
 # event class should load the event dict and check for the correct format
 class Events():

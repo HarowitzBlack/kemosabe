@@ -5,6 +5,7 @@
 import requests
 import json
 
+print("api module loaded")
 
 def get_started_btn():
     params = {

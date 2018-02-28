@@ -1,6 +1,8 @@
 
 # INTERNAL LOGIC (o_o)
 
+
+
 class DictoObj(object):
     """ Convert the ugly dict into an object
     """

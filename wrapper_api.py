@@ -1,15 +1,14 @@
 
-
+from .configs import configurations
 from .api import MessengerAPI
 from .payload_builder import payload
-from .configs import configurations
 import os
 import json
+print("wrapper module loaded")
 
-
-bot = MessengerAPI()
-pload = payload()
 cfgs = configurations()
+pload = payload()
+bot = MessengerAPI()
 
 
 def send_text_message(uid,text):

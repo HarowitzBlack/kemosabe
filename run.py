@@ -1,17 +1,23 @@
 
+print("run module loaded")
+
 from flask import Flask,request
-from .handler import Handler
 from .configs import configurations
 from .events import Events
+from .handler import Handler
+
 
 
 app = Flask(__name__)
 cfg = configurations()
+events = Events()
 
 
 # for verification
 @app.route('/hook',methods=['GET'])
 def verify_webhook():
+    # gets the verification token from the config object
+    # It's set in the __init__.py file
     verify_token = cfg.get()["vf_token"]
     if request.method == 'GET':
         if request.args.get("hub.verify_token") == verify_token:
@@ -24,12 +30,8 @@ def handle_incomming_responses():
     if request.method == 'POST':
       	# get the response
         response_data = request.get_json()
-        # create a dict with action and map them to a function.
-        # Function names can be anything. But the action must
-        # begin with '@'
-        event_dict = {
-            "@get_started":get_started,
-            "@coffee":coffee,
-        }
+        # loads the events from the Event class
+        # the Kemosabe class in __init.py sets the event dict
+        event_dict = events.load_events()
         Handler(response_data,event_dict)
         return "OK",200
