@@ -112,13 +112,14 @@ class json_response_builder():
             })
         return element_list
 
-from .helpers import get_token
+from .configs import configurations
+cfg = configurations()
 
 
 class MessengerAPI(object):
 
     def __init__(self):
-        token = get_token()
+        token = cfg.get()["api_token"]
         self.params = { "access_token": token }
         self.headers = { 'Content-type': 'application/json' }
         self.graph_api_endpoint = "https://graph.facebook.com/v2.6/me/messages"

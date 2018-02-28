@@ -2,14 +2,17 @@
 from flask import Flask,request
 from .handler import Handler
 from .configs import configurations
+from .events import Events
 
 
 app = Flask(__name__)
-cfg = configurations
+cfg = configurations()
+
 
 # for verification
 @app.route('/hook',methods=['GET'])
 def verify_webhook():
+    verify_token = cfg.get()["vf_token"]
     if request.method == 'GET':
         if request.args.get("hub.verify_token") == verify_token:
             return request.args.get("hub.challenge")

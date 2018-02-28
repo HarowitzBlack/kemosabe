@@ -8,9 +8,9 @@ copyright 2018 (c)
 
 
 __author__      = 'Joel Benjamin (HarowitzBlack)'
-__version__     = '0.9.0i'
+__version__     = '0.9.0'
 
-# If it's meant to be, it'll be
+
 from .wrapper_api import *
 from .configs import Configurations
 from .run import app
