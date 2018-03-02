@@ -20,8 +20,8 @@ class Events():
             if not e.startswith("@"):
                 print("event must start with '@'")
 
-        return self.event_dict()
+        return event_dict
 
-    def load_events():
+    def load_events(self):
         edict = self.check_event_dict(Events.e_dict)
         return edict

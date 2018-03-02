@@ -34,5 +34,5 @@ class Kemosabe(configurations,Events):
         Events.set_event_dict(self,self.events)
 
     # use this to run the bot
-    def run(self,port):
-        app.run(port=port)
+    def run(self,port,debug=False,threaded=False):
+        app.run(port=port,debug=debug,threaded=threaded)
