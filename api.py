@@ -5,6 +5,10 @@
 import requests
 import json
 
+from .configs import configurations
+cfg = configurations()
+
+print("configs loaded in api module")
 print("api module loaded")
 
 def get_started_btn():
@@ -113,14 +117,12 @@ class json_response_builder():
             })
         return element_list
 
-from .configs import configurations
-cfg = configurations()
 
 
 class MessengerAPI(object):
 
     def __init__(self):
-        token = cfg.get()["api_token"]
+        token = "255"#cfg.get()["api_token"]
         self.params = { "access_token": token }
         self.headers = { 'Content-type': 'application/json' }
         self.graph_api_endpoint = "https://graph.facebook.com/v2.6/me/messages"

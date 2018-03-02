@@ -3,7 +3,6 @@ from .configs import configurations
 from .api import MessengerAPI
 from .payload_builder import payload
 import os
-import json
 print("wrapper module loaded")
 
 cfgs = configurations()
@@ -50,6 +49,8 @@ def parse(action='',**kwargs):
     pstr = pload.parse(action,**kwargs)
     return pstr
 
-def set_configurations(api_key=None,verify_token=None):
+'''
+def set_configurations(path=""):
     # set the configs here
-    cfgs.set(api_key=api_key,verify_token=verify_token)
+    cfgs.set(set_path=path)
+'''

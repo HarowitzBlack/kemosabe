@@ -17,21 +17,22 @@ from .run import app
 from .wrapper_api import *
 
 
+
 # app class
-class Kemosabe():
+class Kemosabe(configurations,Events):
     def __init__(self):
-        event = Events()
+        pass
 
     # sets the configs and keeps them in a dict
-    def set_configuration(self,api_key=None,verify_token=None):
-        # func in wrapper_api module
-        set_configurations(api_key=api_key,verify_token=verify_token)
+    def set_configuration(self,read_from=""):
+        print("reading conifg")
+        configurations.set(self,path=read_from)
 
     # Use this class to set events
     def set_events(self,events):
         self.events = events
-        event.set_event_dict(self.events)
+        Events.set_event_dict(self,self.events)
 
     # use this to run the bot
-    def run(port=8080):
+    def run(self,port):
         app.run(port=port)
