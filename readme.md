@@ -16,7 +16,7 @@ comming soon...
 ## Code - CaffineBot
 
 app.py
-```
+```python
 
     import kemosabe, views
 
@@ -42,7 +42,7 @@ app.py
 ```
 
 views.py
-```
+```python
     import kemosabe
 
     # create a get started function. Triggers when the user taps on the get started button
@@ -51,33 +51,15 @@ views.py
         uid = session.id
         # use this to send a text message
         kemosabe.send_text_message(uid,"Hey there!")
-
-        # this creates a payload string. It can be passed
-        # into quick reply function. The action parameter
-        # is the same as the key in the event dict that we created in app.py
-        # the only difference is that the action doesn't have an '@' (the func automatically adds it in the
-        # begining). So what basically happens is, we map the action 'coffee' to the quick reply button.
-        # When someone taps on the button it launches the coffee()function.
-        # the next parameter is optional, and it's developer defined. You can name it anything you want.
-        # Just remember this, anything after the action parameter goes into the session object to be accessed.
         coffee = kemosabe.create(action="coffee",like_it=True)
         # same as above, you can create multiple payloads.
-        nocoffee = kemosabe.create(action="coffee",like_it=False)
-
-        # Now you create the reply payload. It is a tuple with lists as items.
-        # Each list is a quick reply button. The first argument inside the list
-        # is the text you want to display. The second is the payload string, we
-        # stored it in a coffee variable so pass it on. The third is a type. The only
-        # supported type is text. That's it
+        nocoffee = kemosabe.create(action="coffee",like_it=False
         reply = (["I like coffee",coffee,"text"],["I hate coffee",nocoffee,"text"],)
         # Now send it the the user with a text message
         kemosabe.send_quick_reply(uid,"Do you like coffee?",reply)
 
     def coffee(session):
         uid = session.id
-        # get the variable from the last interaction
-        # As I said earlier, you can access the parameters passed as a variable
-        # Use it to do your thing. Make comparisons or what not!
         like_it = session.like_it
         # if the user tapped on the 'like coffee' button this is excecuted
         if like_it:
