@@ -7,35 +7,18 @@ class configurations():
     _configs = {}
 
     def __init__(self):
-        self.fpath = ""
-        print("loading...")
-
-    def set(self,path):
-        # reads from the json file and stores the configs in memory
-        data = self.read_cfg_file(path=path)
-        self.fpath = path
-        configurations._configs['api_token'] = data["api_key"]
-        configurations._configs['vf_token']  = data["verify_key"]
+        # If you're wondering why the code is messed up? You should know that
+        # it's written by a 17 year old kid. Clearly, I know I have to learn a ton.
+        pass
 
     def get(self):
         # allows access to the private configs
-        data = self.read_cfg_file(path=self.fpath)
+        data = self.read_cfg_file()
         return {"api_key":data["api_key"],"verify_key":data["verify_key"]}
 
-    def read_cfg_file(self,path):
-        if not path.endswith(".json"):
-            # raise an exception
-            print("configs must be a json file")
-        print(path)
-        npath = os.path.abspath(path)
-        print(npath+path)
-        with open("{}".format(path),"r") as cfg:
-            data = cfg.read()
-            data = json.loads(data)
-            # raise an exception if the json properties are not found
-            # or aren't set to the correct property names
-            if not data.get("api_key") or not data.get("verify_key"):
-                print("Couldn't find api key/verify key in '{0}'. Make sure you've set the \
-                property names correctly(property names must be 'api_key'\
-                and 'verify_key').".format(path))
-        return data
+    def read_cfg_file(self):
+         # read the file and get the creds
+         with open("configs.json","r") as cfg_data:
+             creds = cfg_data.read()
+             creds = json.loads(creds)
+             return creds

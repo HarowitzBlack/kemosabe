@@ -2,13 +2,16 @@
 from .configs import configurations
 from .api import MessengerAPI
 from .payload_builder import payload
-import os
+import os,json
 print("wrapper module loaded")
 
 cfgs = configurations()
 pload = payload()
-bot = MessengerAPI()
 
+def load_messenger_api():
+    # call the class
+    bot = MessengerAPI()
+    print("stuff loaded")
 
 def send_text_message(uid,text):
     """Sends a text message to the user
@@ -49,8 +52,23 @@ def parse(action='',**kwargs):
     pstr = pload.parse(action,**kwargs)
     return pstr
 
-'''
-def set_configurations(path=""):
+def set_configurations(api_key=None,verify_key=None):
     # set the configs here
-    cfgs.set(set_path=path)
-'''
+    if api_key == None and verify_key== None:
+        print("No keys found")
+    else:
+        # pack it up and put it in a json file
+        config_data = {"api_key":api_key,"verify_key":verify_key}
+        try:
+            with open("configs.json","w") as cfg_json:
+                print("config file created.")
+                config_data = json.dumps(config_data)
+                print(config_data)
+                cfg_json.write(config_data)
+        except Exception as e:
+            print(e)
+            print("Couldn't create config file")
+        else:
+            # load the messenger api class if a config
+            # file was created succesfully
+            load_messenger_api()
