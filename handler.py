@@ -57,6 +57,7 @@ class Handler():
         # It can be accessed by using the get_session_variables() method of
         # the session Class
         self.session_variables = self.session.get_session_variables()
+        print("OK i'm here")
         Mapper(self.session_variables,self.actions)
 
     def json_parser(self,json_data):
@@ -82,7 +83,7 @@ class Handler():
                         if messages['message'].get('quick_reply'):
                             self.quick_payload = self.extract_quick_reply_payload(messages)
                             p_load = self.payload_extractor.parse(self.quick_payload)
-                            print(p_load)
+                            #print(p_load)
                             for pk,v in p_load.items():
                                 self.session.add_to_session(pk,v)
 

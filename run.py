@@ -1,6 +1,4 @@
 
-print("run module loaded")
-
 from flask import Flask,request
 from .configs import configurations
 from .events import Events
@@ -18,7 +16,7 @@ events = Events()
 def verify_webhook():
     # gets the verification token from the config object
     # It's set in the __init__.py file
-    verify_token = cfg.get()["vf_token"]
+    verify_token = cfg.get()["verify_key"]
     if request.method == 'GET':
         if request.args.get("hub.verify_token") == verify_token:
             return request.args.get("hub.challenge")

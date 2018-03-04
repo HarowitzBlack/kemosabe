@@ -8,12 +8,11 @@ import json
 from .configs import configurations
 cfg = configurations()
 
-print("configs loaded in api module")
-print("api module loaded")
+
 
 def get_started_btn():
     params = {
-        "access_token":token,
+        "access_token":cfg.get()["api_key"],
     }
     payload = json.dumps({
             "get_started":{

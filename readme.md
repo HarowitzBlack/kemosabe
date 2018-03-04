@@ -23,8 +23,7 @@ app.py
     # create a bot object
     bot = kemosabe.Kemosabe()
 
-    # set the configs. Configs must be in a json file
-    bot.set_configuration(read_from="keys.json")
+    bot.set_configuration(api_key="<key>",verify_key="<key>")
 
     # create an event dict and map the functions to event-tags
     events = {

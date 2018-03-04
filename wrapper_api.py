@@ -3,10 +3,10 @@ from .configs import configurations
 from .api import MessengerAPI
 from .payload_builder import payload
 import os,json
-print("wrapper module loaded")
 
 cfgs = configurations()
 pload = payload()
+bot = MessengerAPI()
 
 def load_messenger_api():
     # call the class

@@ -27,11 +27,17 @@ class Mapper():
         self.session_attr = DictoObj(self.session_dict)
         self.actions = actions
         if self.session_dict:
+            print(self.session_dict)
+            #try:
+                # raises error if the input is text
+            print(self.session_dict)
             try:
                 self.user_action = self.session_dict['action']
-                self.trigger_action()
             except:
-                pass
+                self.user_action = "@fallback"
+            self.trigger_action()
+            #except Exception as e:
+            #    print("error:",e)
 
     def trigger_action(self):
         # triggers the function
