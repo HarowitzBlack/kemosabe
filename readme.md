@@ -10,7 +10,7 @@ is seamless.
 
 ## Installation
 
-``` 
+```
   pip3 install kemosabe
 ```
 
@@ -76,7 +76,7 @@ views.py
 
 # How it works?
 
-## Inner workings
+## Events
 
 Every Interaction or event must be encupsulated within a function. And each function
 must only do one task. It can do many tasks(more on this later) nothings stopping you
@@ -86,7 +86,7 @@ to a function. It can be created like this "@someevent". The event-tag must star
 an '@'). Then the events are passed into a function where it waits for the events to
 trigger.
 
-## Session variables
+## Session Object
 
 Every function gets a session object. This object contains the 'important stuff'.
 Here the 'important stuff' is the response sent by the user. Typically, the
