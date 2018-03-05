@@ -30,6 +30,22 @@ def get_started_btn():
     )
     return resp.json()
 
+def send_menu(menu):
+    params = {
+        "access_token":cfg.get()["api_key"],
+    }
+    payload = json.dumps(menu)
+
+    resp = requests.post(
+            "https://graph.facebook.com/v2.6/me/messenger_profile",
+            params=params,
+            data=payload,
+            headers={
+                'Content-type': 'application/json'
+            }
+        )
+    return resp.json()
+
 class json_response_builder():
 
     def __init__(self):

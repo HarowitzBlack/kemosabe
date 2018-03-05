@@ -61,9 +61,7 @@ def set_configurations(api_key=None,verify_key=None):
         config_data = {"api_key":api_key,"verify_key":verify_key}
         try:
             with open("configs.json","w") as cfg_json:
-                print("config file created.")
                 config_data = json.dumps(config_data)
-                print(config_data)
                 cfg_json.write(config_data)
         except Exception as e:
             print(e)

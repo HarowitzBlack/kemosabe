@@ -38,11 +38,6 @@ class Handler():
     """
 
     def __init__(self,json_response,actions):
-        if len(actions) == 0:
-            show_message('e',"Action dict cannot be empty")
-        if "@get_started" not in actions.keys():
-            show_message('e',"action @get_started couldn't be found in the dict.")
-
         self.json_response = json_response
         self.actions = actions
         self.session = session()
@@ -57,7 +52,6 @@ class Handler():
         # It can be accessed by using the get_session_variables() method of
         # the session Class
         self.session_variables = self.session.get_session_variables()
-        print("OK i'm here")
         Mapper(self.session_variables,self.actions)
 
     def json_parser(self,json_data):

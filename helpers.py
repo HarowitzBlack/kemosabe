@@ -1,7 +1,25 @@
 
+# not used anywhere
+
 import os
 import json
 
+simple_menu = {
+
+    "persistent_menu":[
+        {
+          "locale":"default",
+          "composer_input_disabled": True,
+          "call_to_actions":[
+            {
+                "title":"Start Over",
+                "type":"postback",
+                "payload":"@get_started"
+            }
+          ]
+        }
+    ]
+}
 
 def get_token():
     try:

@@ -37,5 +37,17 @@ class Kemosabe(configurations,Events):
         Events.set_event_dict(self,self.events)
 
     # use this to run the bot
-    def run(self,port,debug=False,threaded=False):
+    def run(self,port,debug=False,threaded=False,set_menu=None):
+        # send 'get_started' button request and run the bot
+        # since everything will be loaded, no exception will be raised
+        from .api import get_started_btn,send_menu
+        from .helpers import simple_menu
+        get_started_btn()
+        if set_menu is None:
+            # use the in-built menu
+            # only triggers the @get_started()
+            send_menu(simple_menu)
+        else:
+            send_menu(set_menu)
+
         app.run(port=port,debug=debug,threaded=threaded)
