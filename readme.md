@@ -10,7 +10,8 @@ is seamless.
 
 ## Installation
 
-``` pip3 install kemosabe
+``` 
+  pip3 install kemosabe
 ```
 
 
