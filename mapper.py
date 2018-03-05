@@ -24,17 +24,30 @@ class Mapper():
 
     def __init__(self, session_dict, actions):
         self.session_dict = session_dict
+        # convert the dict to a python object
         self.session_attr = DictoObj(self.session_dict)
         self.actions = actions
         if self.session_dict:
-            print(self.session_dict)
+            # event is triggered if the action tag is
+            # found in the dict.
             if self.session_dict.get("action"):
                 self.user_action = self.session_dict["action"]
                 self.trigger_action()
 
+            # fall back event is triggered only if text is present in the dict
+            # Due to the nature of buttons/quick reply buttons, they send
+            # the display text as a text property in the response. The extractor
+            # extracts the text property thinking it is the text sent by the user.
+            # So, hopefully this fixes the problem.
             if self.session_dict.get("text"):
-                self.user_action = "@fallback"
-                self.trigger_action()
+                # trigger the event only if the text is sent by the user.
+                # To determine what is sent by the user, we check if
+                # the dict contains an action key. If it does we know that
+                # the action event happens only if the user taps on a component.
+                if not self.session_dict.get("action"):
+                    # set to a default event. Must be mapped in the event dict.
+                    self.user_action = "@fallback"
+                    self.trigger_action()
 
 
     def trigger_action(self):

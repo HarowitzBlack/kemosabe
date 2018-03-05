@@ -10,10 +10,13 @@ is seamless.
 
 ## Installation
 
-comming soon...
+``` pip3 install kemosabe
+```
 
 
-## Code - CaffineBot
+## Examples - CaffineBot
+
+Here's an example of a simple bot that asks you if you like coffee or not.
 
 app.py
 ```python
@@ -68,6 +71,9 @@ views.py
             kemosabe.send_text_message(uid,"Ah! Too bad. I love coffee.")
 
 ```
+
+
+# How it works?
 
 ## Inner workings
 

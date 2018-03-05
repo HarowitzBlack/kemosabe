@@ -11,7 +11,6 @@ bot = MessengerAPI()
 def load_messenger_api():
     # call the class
     bot = MessengerAPI()
-    print("stuff loaded")
 
 def send_text_message(uid,text):
     """Sends a text message to the user
