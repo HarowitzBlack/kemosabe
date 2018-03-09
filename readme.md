@@ -8,10 +8,18 @@ The core idea behind Kemosabe is to not worry about spending too much time, thin
 about how to link different interactions, or features so that the resulting outcome
 is seamless.
 
+## prerequisite
+
+```
+    virtualenv -p python3 caffbot # for python3 env
+    source bin/activate           
+
+```
+
 ## Installation
 
 ```
-  pip3 install kemosabe
+  pip3 install kemosabe # for python3 env
 ```
 
 
@@ -48,7 +56,7 @@ views.py
 ```python
     import kemosabe
 
-    # create a get started function. Triggers when the user taps on the get started button
+    # create a get started function. Triggers w hen the user taps on the get started button
     def get_started(session):
         # access the session obj to get the user id
         uid = session.id
@@ -74,26 +82,26 @@ views.py
 ```
 
 
-# How it works?
+
+
+# A little bit of theory 📻
 
 ## Events
 
 Every Interaction or event must be encupsulated within a function. And each function
-must only do one task. It can do many tasks(more on this later) nothings stopping you
-from doing it. The only problem is that the resultant will be messy. Now each function
-must be mapped with an event-tag. (An event-tag is basically a string that corresponds
-to a function. It can be created like this "@someevent". The event-tag must start with
-an '@'). Then the events are passed into a function where it waits for the events to
-trigger.
+can do one or more tasks. Now each function must be mapped with an event-tag.
+(An event-tag is basically a string that corresponds to a function. It can be created
+like this "@someevent". The event-tag must start with an '@'). Then the events are passed
+into a function where it waits for the events to trigger.
 
 ## Session Object
 
-Every function gets a session object. This object contains the 'important stuff'.
+Each function you create gets a session object. This object contains the 'important stuff'.
 Here the 'important stuff' is the response sent by the user. Typically, the
-response sent by the user is a massive JSON object. But the internal extractor
+response sent by the user is a massive JSON object. But the internal parser
 picks the important stuff and puts them into the session object. The session object
 contains the user's id, the message sent by the user, the action that the user triggered
-and developer created variables. Yeah, you can put anything into it.
+and developer created variables, etc.
 
 So, what's the point of this? Well, keeping track of variables that are necessery
 for the future interaction is really crucial. It defines how smart your bot is.

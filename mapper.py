@@ -46,7 +46,7 @@ class Mapper():
                 # the action event happens only if the user taps on a component.
                 if not self.session_dict.get("action"):
                     # set to a default event. Must be mapped in the event dict.
-                    self.user_action = "@fallback"
+                    self.user_action = "@text"
                     self.trigger_action()
 
 

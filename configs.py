@@ -13,12 +13,18 @@ class configurations():
 
     def get(self):
         # allows access to the private configs
-        data = self.read_cfg_file()
+        try:
+            data = self.read_cfg_file()
+        except:
+            print("Couldn't find config.json file")
         return {"api_key":data["api_key"],"verify_key":data["verify_key"]}
 
     def read_cfg_file(self):
          # read the file and get the creds
          with open("configs.json","r") as cfg_data:
-             creds = cfg_data.read()
+             try:
+                 creds = cfg_data.read()
+            except:
+                print("Could't find config.json file")
              creds = json.loads(creds)
              return creds

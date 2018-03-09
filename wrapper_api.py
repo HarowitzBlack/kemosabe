@@ -63,7 +63,6 @@ def set_configurations(api_key=None,verify_key=None):
                 config_data = json.dumps(config_data)
                 cfg_json.write(config_data)
         except Exception as e:
-            print(e)
             print("Couldn't create config file")
         else:
             # load the messenger api class if a config

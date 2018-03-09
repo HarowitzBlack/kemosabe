@@ -101,7 +101,7 @@ class json_response_builder():
         for x in range(len_element):
             # This condition allows us to add a different type to the cards
             # Initially this function only supported web_url type that
-            # lets you open a browser instace inside the bot.
+            # lets you open a browser instance inside the bot.
             # Now I've added the postback type. This type responds like the quick
             # reply button.
             if elements['element_data'][x]['button'][0] == "postback":

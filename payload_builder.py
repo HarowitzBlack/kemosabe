@@ -41,7 +41,7 @@ class payload():
         action_trigger = split_list[0]
         self.final_dict['action'] = action_trigger
 
-        #extracting the args
+        #extracting the params 
         params = split_list[1].split('&')
         for p in params:
             if p == '':
