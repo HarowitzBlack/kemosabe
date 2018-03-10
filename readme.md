@@ -23,65 +23,43 @@ is seamless.
 ```
 
 
-## Examples - CaffineBot
+## Examples - Echo Bot
 
-Here's an example of a simple bot that asks you if you like coffee or not.
+Here's an example of a simple echo bot
 
 app.py
 ```python
 
-    import kemosabe, views
+import kemosabe,views
 
-    # create a bot object
-    bot = kemosabe.Kemosabe()
+events = {
+    "@get_started":views.get_started,
+    "@text":views.text,
+}
 
-    bot.set_configuration(api_key="<key>",verify_key="<key>")
+bot = kemosabe.Kemosabe(events)
+bot.set_keys(api_key="<api_key>",verify_key="<verify_key>")
 
-    # create an event dict and map the functions to event-tags
-    events = {
-      "@get_started":views.get_started,
-      "@coffee":views.coffee,
-    }
-
-    # pass in the events to the bot
-    bot.set_events(events)
-
-    if __name__ == "__main__":
-      # run the bot
-      bot.run(port=8011,debug=True)
+if __name__ == "__main__":
+    bot.run(port=5622,debug=True)
 
 ```
 
 views.py
 ```python
-    import kemosabe
+  import kemosabe
 
-    # create a get started function. Triggers w hen the user taps on the get started button
-    def get_started(session):
-        # access the session obj to get the user id
-        uid = session.id
-        # use this to send a text message
-        kemosabe.send_text_message(uid,"Hey there!")
-        coffee = kemosabe.create(action="coffee",like_it=True)
-        # same as above, you can create multiple payloads.
-        nocoffee = kemosabe.create(action="coffee",like_it=False
-        reply = (["I like coffee",coffee,"text"],["I hate coffee",nocoffee,"text"],)
-        # Now send it the the user with a text message
-        kemosabe.send_quick_reply(uid,"Do you like coffee?",reply)
+  def get_started(session):
+      uid = session.id
+      kemosabe.send_text_message(uid,"Hello there!")
 
-    def coffee(session):
-        uid = session.id
-        like_it = session.like_it
-        # if the user tapped on the 'like coffee' button this is excecuted
-        if like_it:
-            kemosabe.send_text_message(uid,"Great! I love coffee.")
-        else:
-        # If the user tapped on 'hate coffee' button, this is excecuted.
-            kemosabe.send_text_message(uid,"Ah! Too bad. I love coffee.")
+  def text(session):
+      # echo text back
+      uid = session.id
+      text = session.text.lower()
+      kemosabe.send_text_message(uid,text)
 
 ```
-
-
 
 
 # A little bit of theory 📻

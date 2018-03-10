@@ -38,11 +38,12 @@ class Kemosabe(configurations,Events):
         Events.set_event_dict(self,self.events)
 
     # use this to run the bot
-    def run(self,port,debug=False,threaded=False,set_menu=None):
+    def run(self,port,debug=False,threaded=False,set_menu=None,enable_text=True):
         # send 'get_started' button request and run the bot
         # since everything will be loaded, no exception will be raised
         from .api import get_started_btn,send_menu
         from .helpers import simple_menu
+        simple_menu["persistent_menu"][0]["composer_input_disabled"] = enable_text
         get_started_btn()
         if set_menu is None:
             # use the in-built menu
