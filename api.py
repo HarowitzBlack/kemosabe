@@ -145,7 +145,7 @@ class MessengerAPI(object):
         self.x = json_response_builder()
 
     def send(self,user_id,payload):
-        #payload = payload
+
         payload["recipient"] = {"id":str(user_id)}
         self.resp = requests.post(self.graph_api_endpoint,params=self.params,data=json.dumps(payload),headers=self.headers)
         return self.resp.json()
@@ -162,6 +162,8 @@ class MessengerAPI(object):
         return r
 
     def quick_reply(self,user_id,text,qk_payload):
+        """ Constructs quick reply payload.
+        """
 
         qk_resp = self.x.quick_replies_from_list(qk_payload)
         payload = {
@@ -176,6 +178,10 @@ class MessengerAPI(object):
     def generic_template(self,user_id,element_payload):
         #  f = {"element_data":[{"data":["Test","https://www.target.com.au/medias/static_content/product/images/large/34/01/A873401.jpg","sub_title","https://www.target.com.au/p/essentials-t-shirt-light-grey/58106341"],"button":["https://www.target.com.au/p/essentials-t-shirt-light-grey/58106341","Title"]},]}
         # builds the payload for elements in JSON format
+        """ Constructs a template payload and sends it.
+
+            element_payload : The dict with data
+        """
         elements = self.x.build_generic_elements(element_payload)
         payload={
           "message":{
@@ -188,5 +194,14 @@ class MessengerAPI(object):
             }
           }
         }
+        r = self.send(user_id,payload=payload)
+        return r
+
+    def generic_template_raw(self,user_id,template):
+        """ Send direct templates without making any changes
+
+        template : JSON data to be sent. Follow Fb's structure
+        """
+        payload=template
         r = self.send(user_id,payload=payload)
         return r

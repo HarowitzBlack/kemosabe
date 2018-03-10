@@ -1,6 +1,7 @@
 
 import json
 import os
+from .exceptions import ConfigFileNotFound
 
 class configurations():
 
@@ -16,7 +17,7 @@ class configurations():
         try:
             data = self.read_cfg_file()
         except:
-            print("Couldn't find config.json file")
+            raise ConfigFileNotFound("Cannot find configs.json file. Make sure you've created one.")
         return {"api_key":data["api_key"],"verify_key":data["verify_key"]}
 
     def read_cfg_file(self):
@@ -24,7 +25,7 @@ class configurations():
          with open("configs.json","r") as cfg_data:
              try:
                  creds = cfg_data.read()
-            except:
-                print("Could't find config.json file")
+             except:
+                raise ConfigFileNotFound("Cannot find configs.json file. Make sure you've created one.")
              creds = json.loads(creds)
              return creds

@@ -21,19 +21,20 @@ import json
 
 # app class
 class Kemosabe(configurations,Events):
-    def __init__(self):
-        pass
+    def __init__(self,events):
+        self.main_events = events
 
     # sets the configs and keeps them in a dict
     def set_keys(self,api_key=None,verify_key=None):
         # call the set_configurations() from wrapper api
         # This is just a high level wrapper.
         set_configurations(api_key=api_key,verify_key=verify_key)
+        self.set_events()
 
 
     # Use this class to set events
-    def set_events(self,events):
-        self.events = events
+    def set_events(self):
+        self.events = self.main_events
         Events.set_event_dict(self,self.events)
 
     # use this to run the bot
