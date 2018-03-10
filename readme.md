@@ -13,15 +13,14 @@ is seamless.
 #### Prerequisite
 
 ```
-    virtualenv -p python3 caffbot # for python3 env
-    source bin/activate           
-
+virtualenv -p python3 caffbot # for python3 env
+source bin/activate           
 ```
 
 #### Installation
 
 ```
-  pip3 install kemosabe
+pip3 install kemosabe
 ```
 ***
 
@@ -98,6 +97,52 @@ persists for a single future interaction, because it gets updated by the new ses
 So you better store the important stuff in a database.
 
 ***
+
+#### Messenger Componants and how to use them 🖥
+
+###### Quick Reply Buttons
+
+Sending quick reply buttons is pretty easy. It involves of 3 steps.
+
+###### + creating an action trigger
+###### + creating the button
+###### + Sending the button
+
+##### Creating an action trigger
+
+```python
+  altered_carbon = kemosabe.create_action(action='tvshow',type='altered_carbon')
+```
+Calling the *create_action()* method generates an action string. This string contains the information,
+which is used by kemosabe to trigger the right event. To create an action, the first param is action.
+It is a required parameter, it's value corresponds to the event key in the event dict you created.
+Here there's no need to add the '@' since the function automatically does that for you. The other
+parameters are defined by you. These parameters can be accessed using the session object(session.altered_carbon).
+
+##### Creating the button
+
+```python
+   payload = (
+             ["Altered Carbon 👨‍🎤",altered_carbon,"text"], #
+             ...
+             ...
+  )
+```
+
+A button is a tuple containing lists. Each list inside the tuple is a button. Building the button involves
+passing 3 items into the list. Text you want to display on the button, the action string you created earlier and the button type.
+Any number of buttons can be created (Messengers limit is 10). 'text' is the only type for quick reply buttons.
+
+##### Sending the button
+
+```python
+    kemosabe.send_quick_reply(uid,"What's your favorite TV show? 📺",payload)
+```
+
+Now pack everything and send it using the *send_quick_reply()* method. The first parameter is the user's messenger id.
+It can be accessed by using the session object (session.uid). The next parameter is the text message you want to send.
+The final parameter is the tuple you created earlier. That's it. You've created and sent a quick reply button. 
+
 
 #### Todo  🔨📻
 
