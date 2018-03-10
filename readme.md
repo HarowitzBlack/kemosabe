@@ -19,13 +19,13 @@ is seamless.
 ## Installation
 
 ```
-  pip3 install kemosabe # for python3 env
+  pip3 install kemosabe
 ```
 
 
 ## Examples - Echo Bot
 
-Here's an example of a simple echo bot
+Here's an example of a simple an echo bot
 
 app.py
 ```python
@@ -45,23 +45,29 @@ if __name__ == "__main__":
 
 ```
 
-views.py
+create views.py to create events.
+
 ```python
   import kemosabe
 
+  # triggered when the get started button is tapped
   def get_started(session):
       uid = session.id
       kemosabe.send_text_message(uid,"Hello there!")
 
+  # triggered when any text is sent. This event just sends an echo of the message
   def text(session):
-      # echo text back
       uid = session.id
-      text = session.text.lower()
-      kemosabe.send_text_message(uid,text)
+      kemosabe.send_text_message(uid,session.text)
 
 ```
 
+Create a configs.json file with "api_key" and "verify_key" as keys in it.
+```json
 
+  { "api_key":"<cdcfvfv>","verify_key":"<key>" }
+
+```
 # A little bit of theory 📻
 
 ## Events
