@@ -96,4 +96,6 @@ persists for a single future interaction, because it gets updated by the new ses
 So you better store the important stuff in a database.
 
 
+
+
 copyright (c) 2018 Joel Benjamin
