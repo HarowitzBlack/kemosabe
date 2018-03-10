@@ -104,7 +104,7 @@ So you better store the important stuff in a database.
 
 Sending quick reply buttons is pretty easy. It involves of 3 steps.
 
-![Quick Reply image](https://github.com/HarowitzBlack/kemosabe/blob/master/images/qk.jpeg = 100x100)
+![Quick Reply image](https://github.com/HarowitzBlack/kemosabe/blob/master/images/qk.jpeg)
 
 ###### + creating an action trigger
 ###### + creating the button
