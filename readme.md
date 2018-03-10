@@ -98,11 +98,13 @@ So you better store the important stuff in a database.
 
 ***
 
-#### Messenger Componants and how to use them 🖥
+### Messenger Componants and how to use them 🖥
 
 ###### Quick Reply Buttons
 
 Sending quick reply buttons is pretty easy. It involves of 3 steps.
+
+![Quick Reply image](https://github.com/HarowitzBlack/kemosabe/blob/master/images/qk.jpeg = 100x100)
 
 ###### + creating an action trigger
 ###### + creating the button
@@ -141,7 +143,7 @@ Any number of buttons can be created (Messengers limit is 10). 'text' is the onl
 
 Now pack everything and send it using the *send_quick_reply()* method. The first parameter is the user's messenger id.
 It can be accessed by using the session object (session.uid). The next parameter is the text message you want to send.
-The final parameter is the tuple you created earlier. That's it. You've created and sent a quick reply button. 
+The final parameter is the tuple you created earlier. That's it. You've created and sent a quick reply button.
 
 
 #### Todo  🔨📻
