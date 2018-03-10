@@ -1,6 +1,6 @@
 
 
-## Kemosabe - Bot building framework for messenger
+### Kemosabe - Bot building framework for messenger
 
 Kemosabe is a bot building framework for Messenger built on top of Flask. It is simple and quite easy
 to use. It scales pretty well too. It supports most of the Messenger API componants.
@@ -8,7 +8,9 @@ The core idea behind Kemosabe is to not worry about spending too much time, thin
 about how to link different interactions, or features so that the resulting outcome
 is seamless.
 
-## prerequisite
+***
+
+#### Prerequisite
 
 ```
     virtualenv -p python3 caffbot # for python3 env
@@ -16,18 +18,16 @@ is seamless.
 
 ```
 
-## Installation
+#### Installation
 
 ```
   pip3 install kemosabe
 ```
+***
 
+##### Here's an example of a simple an echo bot
 
-## Examples - Echo Bot
-
-Here's an example of a simple an echo bot
-
-app.py
+##### app.py
 ```python
 
 import kemosabe,views
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
 ```
 
-create views.py to create events.
+##### create views.py to create events.
 
 ```python
   import kemosabe
@@ -62,12 +62,14 @@ create views.py to create events.
 
 ```
 
-Create a configs.json file with "api_key" and "verify_key" as keys in it.
+##### Create a configs.json file with "api_key" and "verify_key" as keys in it.
 ```json
 
   { "api_key":"<cdcfvfv>","verify_key":"<key>" }
 
 ```
+***
+
 # A little bit of theory 📻
 
 ## Events
@@ -95,7 +97,13 @@ browsers which do. The only problem with the session object is it's not permanen
 persists for a single future interaction, because it gets updated by the new session object.
 So you better store the important stuff in a database.
 
+***
+
+#### Todo  🔨📻
+
+- [ ] Add all Messenger componants
+- [ ] recieve Image, video and audio
+- [ ] Trigger event when location,image,video or audio is sent.
 
 
-
-copyright (c) 2018 Joel Benjamin
+###### Copyright ©️ 2018 Joel Benjamin
