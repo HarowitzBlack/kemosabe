@@ -61,6 +61,10 @@ if __name__ == "__main__":
   { "api_key":"<cdcfvfv>","verify_key":"<key>" }
 
 ```
+
+Check out another example bot here - https://github.com/HarowitzBlack/Simplebot
+
+
 ***
 
 
