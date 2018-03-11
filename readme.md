@@ -8,7 +8,8 @@ The core idea behind Kemosabe is to not worry about spending too much time, thin
 about how to link different interactions, or features so that the resulting outcome
 is seamless.
 
-***
+
+follow me on twitter [@harowitzblack](https://twitter.com/HarowitzBlack) to get updates 
 
 #### Installation
 
@@ -17,7 +18,7 @@ pip3 install kemosabe
 ```
 ***
 
-##### Here's an example of a simple an echo bot
+#### Here's an example of a simple an echo bot
 
 ##### app.py
 ```python
@@ -62,7 +63,8 @@ if __name__ == "__main__":
 ```
 ***
 
-# A little bit of theory 📻
+
+
 
 ## Events
 
