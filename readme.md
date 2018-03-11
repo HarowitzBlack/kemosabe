@@ -10,13 +10,6 @@ is seamless.
 
 ***
 
-#### Prerequisite
-
-```
-virtualenv -p python3 caffbot # for python3 env
-source bin/activate           
-```
-
 #### Installation
 
 ```
