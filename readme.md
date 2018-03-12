@@ -2,34 +2,36 @@
 
 ### Kemosabe - Bot building framework for messenger
 
-Kemosabe is a bot building framework for Messenger built on top of Flask. It is simple and quite easy
-to use. It scales pretty well too. It supports most of the Messenger API componants.
-The core idea behind Kemosabe is to not worry about spending too much time, thinking
-about how to link different interactions, or features so that the resulting outcome
-is seamless.
+Kemosabe is a bot building framework for Messenger built on top of Flask.
+You can create you're own interaction flow very quickly. You can add tons
+of interactions just by creating functions for each of the events. Kemosabe supports
+most of the Messenger API componants. So you don't have to worry about using another
+external wrapper or anything.
+
+The core idea behind Kemosabe is to build a good flow with less code.
 
 
-follow me on twitter [@harowitzblack](https://twitter.com/HarowitzBlack) to get updates 
+follow me on twitter [@harowitzblack](https://twitter.com/HarowitzBlack) to get updates
 
 #### Installation
 
 ```
 pip3 install kemosabe
 ```
-***
+
 
 #### Here's an example of a simple an echo bot
 
 ##### app.py
 ```python
-
 import kemosabe,views
-
+# map events to function
 events = {
     "@get_started":views.get_started,
     "@text":views.text,
 }
 
+# set events and configs
 bot = kemosabe.Kemosabe(events)
 bot.set_keys(api_key="<api_key>",verify_key="<verify_key>")
 
@@ -58,87 +60,61 @@ if __name__ == "__main__":
 ##### Create a configs.json file with "api_key" and "verify_key" as keys in it.
 ```json
 
-  { "api_key":"<cdcfvfv>","verify_key":"<key>" }
+  { "api_key":"<key>","verify_key":"<key>" }
 
 ```
-***
 
 
+### Events
+
+Every Interaction or event must be encupsulated within a function. Now each function must
+be mapped with an event-string.(An event-tag is basically a string that corresponds to a function.
+It can be created like this "@some_event". The event-tag must start with an '@'). Then the events
+are passed into a function where it waits for the events to trigger.
+
+### Session Object
+
+Each function you create gets a session object. This object contains the
+users data (user id,message,location,..) and the meta-data that you passed in when
+you created an action. You can use them inside a function by accessing it's attributes.
+To get the users id you do `session.uid`. To access the meta-data you do `session.whatever_variable_name_you_passed_in`.
+Remember the session object only remembers everything for a single request,so don't expect it
+to remember everything forever.
 
 
-## Events
+### Messenger API Componants and how to use them 🖥
 
-Every Interaction or event must be encupsulated within a function. And each function
-can do one or more tasks. Now each function must be mapped with an event-tag.
-(An event-tag is basically a string that corresponds to a function. It can be created
-like this "@someevent". The event-tag must start with an '@'). Then the events are passed
-into a function where it waits for the events to trigger.
-
-## Session Object
-
-Each function you create gets a session object. This object contains the 'important stuff'.
-Here the 'important stuff' is the response sent by the user. Typically, the
-response sent by the user is a massive JSON object. But the internal parser
-picks the important stuff and puts them into the session object. The session object
-contains the user's id, the message sent by the user, the action that the user triggered
-and developer created variables, etc.
-
-So, what's the point of this? Well, keeping track of variables that are necessery
-for the future interaction is really crucial. It defines how smart your bot is.
-You wouldn't want to build a dumb bot that can't remember stuff right? The other reason
-for the session object is that messenger app doesn't offer space to store sessions unlike
-browsers which do. The only problem with the session object is it's not permanent. It only
-persists for a single future interaction, because it gets updated by the new session object.
-So you better store the important stuff in a database.
-
-***
-
-### Messenger Componants and how to use them 🖥
-
-###### Quick Reply Buttons
-
-Sending quick reply buttons is pretty easy. It involves of 3 steps.
+###### Quick Demo on Quick Reply Buttons
 
 ![Quick Reply image](https://github.com/HarowitzBlack/kemosabe/blob/master/images/qk.jpeg)
 
-###### + creating an action trigger
-###### + creating the button
-###### + Sending the button
-
-##### Creating an action trigger
-
 ```python
+
+  # create action
   altered_carbon = kemosabe.create_action(action='tvshow',type='altered_carbon')
-```
-Calling the *create_action()* method generates an action string. This string contains the information,
-which is used by kemosabe to trigger the right event. To create an action, the first param is action.
-It is a required parameter, it's value corresponds to the event key in the event dict you created.
-Here there's no need to add the '@' since the function automatically does that for you. The other
-parameters are defined by you. These parameters can be accessed using the session object(session.altered_carbon).
+  # create quick reply payload
+  payload = (
+            ["Altered Carbon 👨‍🎤",altered_carbon,"text"],
+            ...
+            ...
+ )
+ # send the payload
+ kemosabe.send_quick_reply(uid,"What's your favorite TV show? 📺",payload)
 
-##### Creating the button
-
-```python
-   payload = (
-             ["Altered Carbon 👨‍🎤",altered_carbon,"text"], #
-             ...
-             ...
-  )
 ```
 
-A button is a tuple containing lists. Each list inside the tuple is a button. Building the button involves
-passing 3 items into the list. Text you want to display on the button, the action string you created earlier and the button type.
-Any number of buttons can be created (Messengers limit is 10). 'text' is the only type for quick reply buttons.
+In the first line you create an action so that whenever a user taps the button something happens.
+The action param requires an event-string which is mapped to a function in the event dict. The
+event-string acts as a callback which calls the function when the user taps on the button. The next
+param is defined by you. It can be anything, these additional params act as meta-data which gives info
+on the action. It'll be loaded in the session object, so any data passed here could be used inside a function.
 
-##### Sending the button
+Next we create the buttons. Each button is represented as a list. You can create any number of lists,
+then you pack it into a tuple. That becomes the payload. Inside the list the first value is the text you want
+to show on the button, the second value is the action you created earlier, and third is the type, which is text for
+all quick reply buttons. That's it! Then you send the payload to the user.
 
-```python
-    kemosabe.send_quick_reply(uid,"What's your favorite TV show? 📺",payload)
-```
 
-Now pack everything and send it using the *send_quick_reply()* method. The first parameter is the user's messenger id.
-It can be accessed by using the session object (session.uid). The next parameter is the text message you want to send.
-The final parameter is the tuple you created earlier. That's it. You've created and sent a quick reply button.
 
 
 #### Todo  🔨📻
