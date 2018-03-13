@@ -64,6 +64,8 @@ if __name__ == "__main__":
 
 ```
 
+Check out another example bot here - https://github.com/HarowitzBlack/Simplebot
+
 
 ### Events
 
