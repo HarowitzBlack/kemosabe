@@ -6,13 +6,13 @@ from .handler import Handler
 
 
 
-app = Flask(__name__)
+flask_app = Flask(__name__)
 cfg = configurations()
 events = Events()
 
 
 # for verification
-@app.route('/hook',methods=['GET'])
+@flask_app.route('/hook',methods=['GET'])
 def verify_webhook():
     # gets the verification token from the config object
     # It's set in the __init__.py file
@@ -23,7 +23,7 @@ def verify_webhook():
         return "OK",200
 
 # webhook to get
-@app.route('/hook',methods=['POST'])
+@flask_app.route('/hook',methods=['POST'])
 def handle_incomming_responses():
     if request.method == 'POST':
       	# get the response

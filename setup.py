@@ -11,7 +11,7 @@ setup(name="kemosabe",
       license='MIT',
       packages=['kemosabe'],
       install_requires=[
-          'Flask','requests'
+          'Flask','requests','gunicorn'
       ],
       zip_safe=False
 )
