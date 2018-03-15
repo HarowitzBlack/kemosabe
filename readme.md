@@ -39,7 +39,7 @@ pip3 install kemosabe
 
 ```
 
-Wait, How do you run this? Well, to run this you have to create the main application.
+Wait, How do you run this? Well, to run this you have to create the main application,
 views.py just contains events.
 
 ##### app.py
@@ -109,9 +109,8 @@ all quick reply buttons. That's it! Then you send the payload to the user.
 ### Events dict
 
 Every Interaction or event must be encupsulated within a function. Now each function must
-be mapped with an event-string.(An event-tag is basically a string that corresponds to a function.
-It can be created like this "@some_event". The event-tag must start with an '@'). Then the events
-are passed into a function where it waits for the events to trigger.
+be mapped with an event-tag. An event-tag is basically a string that corresponds to a function.
+It can be created like this "@some_event". The event-tag must start with an '@'.
 
 ```python
 
@@ -151,7 +150,7 @@ def some_task(session):
 You can set the Persistent Menu using the run() methods `set_menu` parameter.
 Default is None, which will use a basic menu with a start over button triggering '@get_started'.
 
-```
+```python
 menu = {
   "persistent_menu":[
       {
