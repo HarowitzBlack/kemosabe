@@ -1,5 +1,8 @@
 
 
+<img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/demo.gif">
+<img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/echo_demo.gif">
+
 ### Kemosabe - Bot building framework for messenger
 
 Kemosabe is a bot building framework for Messenger built on top of Flask.
