@@ -1,7 +1,11 @@
 
 
-<img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/demo.gif">
-<img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/echo_demo.gif">
+
+
+
+Demo Bot                                                                             |  echo bot
+:-----------------------------------------------------------------------------------:|:-------------------------:
+ <img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/demo1.gif">  |  <img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/echo_demo.gif">
 
 ### Kemosabe - Bot building framework for messenger
 
