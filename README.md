@@ -232,7 +232,7 @@ event tag you want to launch (Remember, the event-tag you set must be mapped wit
 
 ### Enabling or Disabling text input
 
-![Quick Reply image](https://github.com/HarowitzBlack/kemosabe/blob/master/images/text.jpeg)
+<img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/text.jpeg" width="100" height="70">
 
 To Enable/Disable the text input simple set the `enable_text` parameter to `True or False` in
 the run() method.
