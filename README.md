@@ -75,7 +75,7 @@ Check out another example bot here - https://github.com/HarowitzBlack/Simplebot
 
 ### Messenger API Componants and how to use them 🖥
 
-###### Quick Demo on Quick Reply Buttons
+### Quick Reply Buttons
 
 ![Quick Reply image](https://github.com/HarowitzBlack/kemosabe/blob/master/images/qk.jpeg)
 
@@ -104,6 +104,62 @@ Next we create the buttons. Each button is represented as a list. You can create
 then you pack it into a tuple. That becomes the payload. Inside the list the first value is the text you want
 to show on the button, the second value is the action you created earlier, and third is the type, which is text for
 all quick reply buttons. That's it! Then you send the payload to the user.
+
+### Generic Templates / Cards
+
+![Quick Reply image](https://github.com/HarowitzBlack/kemosabe/blob/master/images/card.jpeg)
+
+```python
+
+cards = {"element_data":[
+                          {
+                                "data":["Title Button 1","image_link","Description text","link to website"],\
+                                "button":["web_url","link to website","button text"]
+                          },
+                          {
+                                "data":["Title Button 2","image_link","Description text","link to website"],\
+                                "button":["payload","@action","button text"]
+                          },
+                          ...
+
+]}
+kemosabe.send_card_templates(uid,cards)
+
+```
+
+##### Method 1
+
+There are 2 ways to send a Card. The above method is one way. You can add more cards just by adding
+a dictionary to the `element_data` list. To create a card the card dictionary takes 2 key-value list pairs.
+The first one is `data`, and it contains the important information to display the card (like image,card title etc).
+And the second one is `button`, it contains the information required to construct the button. The button list
+takes 3 parameters - Type,link/action and text on the button. Type can be of 2 types - web_url or payload.
+If you set the type to web_url then the next parameter must be a link. If you set the type to payload, the 2nd parameter
+must be a valid event-tag. This method is good when you have to generate buttons on the fly. Just put it through a loop
+and feed in the required data (Look at the examples).
+
+##### Method 2
+
+The other way is to use the `send_card_templates_raw(user_id,json_payload)` method. This method lets you pass
+the JSON payload/dict directly. This method is good when your content is not dynamic. Store the data in some JSON
+file and feed it to this method.
+
+```python
+raw = {"payload": {
+    "template_type":"generic",
+    "elements":[
+      <GENERIC_TEMPLATE>,
+      <GENERIC_TEMPLATE>,
+      ...
+    ]
+  }
+}
+# see https://developers.facebook.com/docs/messenger-platform/send-messages/template/generic
+
+kemosabe.send_card_templates_raw(user_id,raw)
+
+```
+
 
 
 ### Events dict
@@ -175,6 +231,8 @@ To trigger an event when someone clicks on a menu button, simple set the payload
 event tag you want to launch (Remember, the event-tag you set must be mapped with a function).
 
 ### Enabling or Disabling text input
+
+![Quick Reply image](https://github.com/HarowitzBlack/kemosabe/blob/master/images/text.jpeg)
 
 To Enable/Disable the text input simple set the `enable_text` parameter to `True or False` in
 the run() method.
