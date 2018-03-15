@@ -77,7 +77,7 @@ Check out another example bot here - https://github.com/HarowitzBlack/Simplebot
 
 ### Quick Reply Buttons
 
-<img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/qk.jpeg" width="400" height="400">
+<img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/qk.jpeg" width="400" height="270">
 
 
 ```python
@@ -233,7 +233,7 @@ event tag you want to launch (Remember, the event-tag you set must be mapped wit
 
 ### Enabling or Disabling text input
 
-<img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/text.jpeg" width="400" height="400">
+<img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/text.jpeg" width="400" height="300">
 
 To Enable/Disable the text input simple set the `enable_text` parameter to `True or False` in
 the run() method.
