@@ -22,24 +22,6 @@ pip3 install kemosabe
 
 #### Here's an example of a simple an echo bot
 
-##### app.py
-```python
-import kemosabe,views
-# map events to function
-events = {
-    "@get_started":views.get_started,
-    "@text":views.text,
-}
-
-# set events and configs
-bot = kemosabe.Kemosabe(events)
-bot.set_keys(api_key="<api_key>",verify_key="<verify_key>")
-
-if __name__ == "__main__":
-    bot.run(port=5622,debug=True)
-
-```
-
 ##### create views.py to create events.
 
 ```python
@@ -57,6 +39,30 @@ if __name__ == "__main__":
 
 ```
 
+Wait, How do you run this? Well, to run this you have to create the main application.
+views.py just contains events.
+
+##### app.py
+```python
+import kemosabe,views
+# map events to function
+events = {
+    "@get_started":views.get_started,
+    "@text":views.text,
+}
+
+# set events and configs
+bot = kemosabe.Kemosabe(events)
+bot.set_keys(api_key="<api_key>",verify_key="<verify_key>")
+
+if __name__ == "__main__":
+    # runs the bot using Gunicorn
+    bot.run(port=4999)
+```
+
+You don't have to run the bot using any external WSGI servers, Kemosabe runs Gunicorn
+internally.
+
 ##### Create a configs.json file with "api_key" and "verify_key" as keys in it.
 ```json
 
@@ -65,23 +71,6 @@ if __name__ == "__main__":
 ```
 
 Check out another example bot here - https://github.com/HarowitzBlack/Simplebot
-
-
-### Events
-
-Every Interaction or event must be encupsulated within a function. Now each function must
-be mapped with an event-string.(An event-tag is basically a string that corresponds to a function.
-It can be created like this "@some_event". The event-tag must start with an '@'). Then the events
-are passed into a function where it waits for the events to trigger.
-
-### Session Object
-
-Each function you create gets a session object. This object contains the
-users data (user id,message,location,..) and the meta-data that you passed in when
-you created an action. You can use them inside a function by accessing it's attributes.
-To get the users id you do `session.uid`. To access the meta-data you do `session.whatever_variable_name_you_passed_in`.
-Remember the session object only remembers everything for a single request,so don't expect it
-to remember everything forever.
 
 
 ### Messenger API Componants and how to use them 🖥
@@ -117,6 +106,86 @@ to show on the button, the second value is the action you created earlier, and t
 all quick reply buttons. That's it! Then you send the payload to the user.
 
 
+### Events dict
+
+Every Interaction or event must be encupsulated within a function. Now each function must
+be mapped with an event-string.(An event-tag is basically a string that corresponds to a function.
+It can be created like this "@some_event". The event-tag must start with an '@'). Then the events
+are passed into a function where it waits for the events to trigger.
+
+```python
+
+events = {
+  "@get_started":hello,
+  "@text":text_function,
+  "@dotask":some_task,
+}
+
+```
+
+`@get_started` and `@text` are mandatory event tags. `@get_started` sends the greeting text when
+a user taps on the get started button. And `@text` function is triggered when a user types something
+into the text box and sends it.
+
+### Session Object
+
+Each function you create gets a session object. This object contains the
+users data (user id,message,location,..) and the meta-data that you passed in when
+you created an action. You can use them inside a function by accessing it's attributes.
+To get the users id you do `session.uid`. To access the meta-data you do `session.whatever_variable_name_you_passed_in`.
+Remember the session object only remembers everything for a single request,so don't expect it
+to remember everything forever.
+
+```python
+
+def some_task(session):
+  user_id = session.id
+  msg = session.text
+  print(user_id)
+  print(msg)
+
+```
+
+### Persistent Menu
+
+You can set the Persistent Menu using the run() methods `set_menu` parameter.
+Default is None, which will use a basic menu with a start over button triggering '@get_started'.
+
+```
+menu = {
+  "persistent_menu":[
+      {
+        "locale":"default",
+        "composer_input_disabled": false,
+        "call_to_actions":[
+          {
+              "title":"Take me to Wonderland",
+              "type":"postback",
+              "payload":"@some_task"
+          }
+        ]
+      }
+  ]
+}
+
+bot.run(port=4999,set_menu=menu)
+
+```
+
+To trigger an event when someone clicks on a menu button, simple set the payload key to the
+event tag you want to launch (Remember, the event-tag you set must be mapped with a function).
+
+### Enabling or Disabling text input
+
+To Enable/Disable the text input simple set the `enable_text` parameter to `True or False` in
+the run() method.
+
+```python
+
+# enables text input when set to true. Set to false to disable it.
+bot.run(port=4999,enable_text=True)
+
+```
 
 
 #### Todo  🔨📻
@@ -124,6 +193,7 @@ all quick reply buttons. That's it! Then you send the payload to the user.
 - [ ] Add all Messenger componants
 - [ ] recieve Image, video and audio
 - [ ] Trigger event when location,image,video or audio is sent.
+- [ ] Integration with NLP platforms (wit.ai,dialogflow)
 
 
 ###### Copyright ©️ 2018 Joel Benjamin
