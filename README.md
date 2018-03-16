@@ -20,6 +20,8 @@ The core idea behind Kemosabe is to build a good flow with less code.
 
 follow me on twitter [@harowitzblack](https://twitter.com/HarowitzBlack) to get updates
 
+See how to build different types of bots in the [examples](https://github.com/HarowitzBlack/Kemosabe-examples)
+
 #### Installation
 
 ```
@@ -77,14 +79,14 @@ internally.
 
 ```
 
-Check out another example bot here - https://github.com/HarowitzBlack/Simplebot
+Check out echobot example here - https://github.com/HarowitzBlack/Kemosabe-examples
 
 
 ### Messenger API Componants and how to use them 🖥
 
 ### Quick Reply Buttons
 
-<img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/qk.jpeg" width="400" height="270">
+<img src="https://github.com/HarowitzBlack/kemosabe/blob/master/images/qk.jpeg" width="600" height="270">
 
 
 ```python
