@@ -258,7 +258,7 @@ bot.run(port=4999,enable_text=True)
 #### Todo  🔨📻
 
 - [ ] Add all Messenger componants
-- [ ] recieve Image, video and audio
+- [ ] receive Image, video and audio
 - [ ] Trigger event when location,image,video or audio is sent.
 - [ ] Integration with NLP platforms (wit.ai,dialogflow)
 
